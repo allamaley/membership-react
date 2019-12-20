@@ -3,8 +3,8 @@ import Plan from './Plan';
 import './style.css';
 
 class AppMembership extends React.Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 		this.state = {
 			data: [
 				{
@@ -12,28 +12,42 @@ class AppMembership extends React.Component {
 					size: "100 blocks",
 					title: "Basic",
 					description: "...",
-					price: "1000"
+					price: "1000",
+					active: false
 				},
 				{
 					id: 2,
 					size: "200 blocks",
 					title: "VIP",
 					description: "...",
-					price: "3000"
+					price: "3000",
+					active: false
 				},
 				{
 					id: 3,
 					size: "300 blocks",
 					title: "Gold",
 					description: "...",
-					price: "6000"
+					price: "6000",
+					active: false
 				}
-			]
+			],
+			selectedPlan: null,
 		}
 	};
+
+	pickPlan = (index) => {
+		this.setState((prevState) => {
+			const data = [...prevState.data].map((item, i) => (item.active == false && i == index) ? Object.assign(item, { active: true }) : Object.assign(item, { active: false }));
+			console.log(data);
+			return {
+				selectedPlan: this.state.data[index],
+				data: data
+			}
+		});
+	};
+
 	render() {
-		const planComponent = this.state.data.map(plan => <Plan key={plan.id}
-			data={plan} />)
 
 		return (
 			<div>
@@ -45,7 +59,16 @@ class AppMembership extends React.Component {
 				</h2>
 
 				<div className="plans">
-					{planComponent}
+
+					{this.state.data.map((plan, index) => {
+						return <Plan
+							key={index}
+							data={plan}
+							pickPlan={this.pickPlan.bind(this, index)}
+							active={this.state.active}
+						/>
+					}
+					)}
 				</div>
 				<div className="error">you should pick a plan to continue</div>
 			</div>

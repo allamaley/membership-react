@@ -4,31 +4,15 @@ import './style.css';
 class Plan extends React.Component {
 	constructor(props) {
 		super(props);
-		this.toggleClass = this.toggleClass.bind(this);
-		this.state = {
-			selectedPlan: null,
-		};
-	}
-	toggleClass() {
-		const currentState = this.state.active;
-		this.setState(prevState => {
-			if (prevState == 'plan')
-				return {
-					active: !currentState
-				}
-		}
-		);
-	};
-	pickPlan(plan) {
-		this.setState({
-			selectedPlan: plan
-		});
+		// this.state = {
+		// 	active: null,
+		// };
 	}
 
 	render() {
 		return (
-			<div className={this.state.active ? 'active-plan plan' : 'plan'}
-				onClick={this.pickPlan(plan)}>
+			<div className={this.props.data.active ? 'active-plan plan' : 'plan'}
+				onClick={this.props.pickPlan}>
 				<div className="size">{this.props.data.size}</div>
 				<div className="description">
 					<span className="title">{this.props.data.title}</span>
