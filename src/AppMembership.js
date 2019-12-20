@@ -8,7 +8,7 @@ class AppMembership extends React.Component {
 		this.state = {
 			data: [
 				{
-					id: 1,
+					id: 0,
 					size: "100 blocks",
 					title: "Basic",
 					description: "...",
@@ -16,7 +16,7 @@ class AppMembership extends React.Component {
 					active: false
 				},
 				{
-					id: 2,
+					id: 1,
 					size: "200 blocks",
 					title: "VIP",
 					description: "...",
@@ -24,7 +24,7 @@ class AppMembership extends React.Component {
 					active: false
 				},
 				{
-					id: 3,
+					id: 2,
 					size: "300 blocks",
 					title: "Gold",
 					description: "...",
@@ -32,10 +32,37 @@ class AppMembership extends React.Component {
 					active: false
 				}
 			],
-			selectedPlan: null,
+			selectedPlan: this.props.selectedPlan,
 		}
 	};
-
+	componentDidUpdate() {
+		console.log("Did Update")
+	}
+	componentDidMount() {
+		if (this.state.selectedPlan !== null) {
+			const index = this.state.selectedPlan.id;
+			this.setState((prevState) => {
+				const updatedData = [...prevState.data].map((item, id) => {
+					if (id === index && item.active === false) {
+						return {
+							...item,
+							active: true
+						}
+					}
+					else {
+						return {
+							...item,
+							active: false
+						}
+					}
+				});
+				return {
+					data: updatedData
+				}
+			});
+		}
+		console.log("Mounted")
+	}
 	pickPlan = (index) => {
 		this.setState((prevState) => {
 			const updatedData = [...prevState.data].map((item, id) => {
@@ -56,6 +83,7 @@ class AppMembership extends React.Component {
 			});
 			// const data = [...prevState.data].map((item, i) => (item.active == false && i == index) ? Object.assign(item, { active: true }) : Object.assign(item, { active: false }));
 			console.log(updatedData);
+			console.log(this.state.selectedPlan);
 			return {
 				selectedPlan: this.state.data[index],
 				data: updatedData
@@ -81,6 +109,7 @@ class AppMembership extends React.Component {
 							key={index}
 							data={plan}
 							pickPlan={this.pickPlan.bind(this, index)}
+							selectedPlan={this.state.selectedPlan}
 							active={this.state.active}
 						/>
 					}

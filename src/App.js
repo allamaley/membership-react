@@ -1,6 +1,7 @@
 import React from 'react';
 import AppMembership from './AppMembership';
 import AppUser from './AppUser';
+import AppReviewOrder from './AppReviewOrder';
 import './style.css';
 
 class App extends React.Component {
@@ -9,10 +10,18 @@ class App extends React.Component {
 		this.state = {
 			screens: [
 				'AppMembership',
-				'AppUser'
+				'AppUser',
+				'AppReviewOrder'
 			],
 			currentStepNumber: 1,
-			selectedPlan: null,
+			selectedPlan: {
+				id: 0,
+				size: "100 blocks",
+				title: "Basic",
+				description: "...",
+				price: "1000",
+				active: false
+			},
 		};
 		this.isLastStep = this.isLastStep.bind(this);
 		this.progress = this.progress.bind(this);
@@ -25,7 +34,13 @@ class App extends React.Component {
 	progress = () => {
 		return (this.state.currentStepNumber / this.state.screens.length()) * 100;
 	};
+
+	submit() {
+
+	}
+
 	nextButtonAction = () => {
+		this.submit();
 		this.setState((prevState) => {
 			return {
 				currentStepNumber: prevState.currentStepNumber + 1
@@ -43,11 +58,16 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				{(this.state.currentStepNumber === 1) ? (
-					<AppMembership selectedPlan={this.state.selectedPlan} />
-				) : (
-						<AppUser />
-					)
+				{
+					(this.state.currentStepNumber === 1) ? (
+						<AppMembership selectedPlan={this.state.selectedPlan} />
+					) : (
+							(this.state.currentStepNumber === 2) ? (
+								<AppUser />
+							) : (
+									<AppReviewOrder selectedPlan={this.state.selectedPlan} />
+								)
+						)
 				}
 
 				<div className="buttons">

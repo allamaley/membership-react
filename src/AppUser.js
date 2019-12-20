@@ -1,14 +1,61 @@
 import React from 'react';
+import FormEmail from './FormEmail';
+import FormPassword from './FormPassword';
+import FormName from './FormName';
 import './style.css';
+
 
 class AppUser extends React.Component {
 	constructor(props) {
-		super(props)
+		super(props);
 		this.state = {
-
-		}
+			email: null,
+			validEmail: true,
+			validPassword: true,
+			validName: true,
+		};
+		this.validateEmail = this.validateEmail.bind(this);
+		this.validateText = this.validateText.bind(this);
+		this.checkInput = this.checkInput.bind(this);
 	};
 
+
+	checkInput = (e) => {
+		const value = e.target.value;
+		const type = e.target.type;
+		const validation = type === 'email' ? this.validateEmail(value)
+			: this.validateText(value);
+		console.log(validation);
+		if (type === 'email') {
+			this.setState({
+				validEmail: validation ? true : false
+			});
+		} else if (type === 'password') {
+			this.setState({
+				validPassword: validation ? true : false
+			});
+		} else if (type === 'text') {
+			this.setState({
+				validName: validation ? true : false
+			});
+		}
+
+	};
+
+	validateEmail(email) {
+		const regex = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+		if (email.match(regex)) {
+			return true
+		}
+		return false
+	};
+
+	validateText(text) {
+		if (text !== '') {
+			return true
+		}
+		return false
+	};
 
 	render() {
 
@@ -18,49 +65,19 @@ class AppUser extends React.Component {
 
 				<h2 className="subtitle">Create an account or log in:</h2>
 				<form className="form">
-					<div className="form-group">
-						<label className="form-label" htmlFor="email">Email</label>
-						<input
-							type="text"
-							placeholder="test@email.com"
-							className="form-control"
-							id="email"
-						/>
-						<div className="error info">
-							<a href="#">Reset</a>
-						</div>
-						<div className="error">email is required</div>
-						<div className="error">email is invalid</div>
-					</div>
+					<FormEmail
+						checkInput={this.checkInput.bind(this)}
+						validEmail={this.state.validEmail}
+					/>
+					<FormPassword
+						checkInput={this.checkInput.bind(this)}
+						validPassword={this.state.validPassword}
+					/>
+					<FormName
+						checkInput={this.checkInput.bind(this)}
+						validName={this.state.validName}
+					/>
 
-					<div className="form-group">
-						<label className="form-label" htmlFor="password">Password</label>
-						<input
-							type="password"
-							placeholder="Password"
-							className="form-control"
-							id="password"
-						/>
-						<div
-
-							className="error"
-						>password is required</div>
-						<div
-
-							className="error"
-						>password is invalid - try again</div>
-					</div>
-
-					<div className="form-group">
-						<label className="form-label" htmlFor="name">Name</label>
-						<input
-							type="text"
-							placeholder="Nice name"
-							className="form-control"
-							id="name"
-						/>
-						<div className="error">name is required</div>
-					</div>
 				</form>
 			</div>
 		);
