@@ -13,10 +13,14 @@ class AppUser extends React.Component {
 			validEmail: true,
 			validPassword: true,
 			validName: true,
+			emailCheckedInDB: false,
+			existingUser: false,
+			loggedIn: false
 		};
 		this.validateEmail = this.validateEmail.bind(this);
 		this.validateText = this.validateText.bind(this);
 		this.checkInput = this.checkInput.bind(this);
+		this.checkIfUserExists = this.checkIfUserExists.bind(this);
 	};
 
 
@@ -56,6 +60,61 @@ class AppUser extends React.Component {
 		}
 		return false
 	};
+
+	checkIfUserExists() {
+		if (!this.state.validEmail) {
+			fetch('./api')
+				.then(response => response.json())
+				.then(data => console.log(data))
+			// 	return checkIfUserExistsInDB(this.form.email)
+			// 		.then(() => {
+			// 			// USER EXISTS
+			// 			this.state.existingUser = true;
+			// 			this.state.emailCheckedInDB = true;
+			// 			this.$emit("updateAsyncState", "success");
+			// 		})
+			// 		.catch(() => {
+			// 			// USER DOESN'T EXIST
+			// 			this.state.existingUser = false;
+			// 			this.state.emailCheckedInDB = true;
+			// 			this.$emit("updateAsyncState", "success");
+			// 		});
+			// } else {
+			// 	return Promise.reject("email is invalid");
+			// }
+		}
+	}
+
+	submit = () => {
+		let job;
+		if (!this.state.emailCheckedInDB) {
+			job = this.checkIfUserExists();
+		} else {
+			if (this.state.existingUser && !this.state.loggedIn) {
+				// job = this.login();
+			} else {
+				// new user is typing info manually
+				// job = Promise.resolve();
+			}
+		}
+
+		// return new Promise((resolve, reject) => {
+		// 	job
+		// 		.then(() => {
+		// 			if (!this.$v.$invalid) {
+		// 				resolve({
+		// 					email: this.form.email,
+		// 					password: this.form.password,
+		// 					name: this.form.name
+		// 				});
+		// 			} else {
+		// 				reject("data is not valid yet");
+		// 			}
+		// 		})
+		// 		.catch(error => reject(error));
+		// });
+	};
+
 
 	render() {
 
