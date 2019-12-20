@@ -27,7 +27,7 @@ class Summary extends React.Component {
 
 				<div className="plans">
 					<div className="plan active-plan selected-plan">
-						<div className="size">{this.props.selectedPlan}</div>
+						<div className="size">{this.props.selectedPlan.size}</div>
 
 						<div className="description">
 							<span className="title">NAME</span>
