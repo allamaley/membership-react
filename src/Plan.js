@@ -4,6 +4,7 @@ import './style.css';
 class Plan extends React.Component {
 	constructor(props) {
 		super(props);
+		// this.toggleClass = this.toggleClass.bind(this);
 		// this.state = {
 		// 	active: null,
 		// };

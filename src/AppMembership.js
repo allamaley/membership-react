@@ -38,11 +38,27 @@ class AppMembership extends React.Component {
 
 	pickPlan = (index) => {
 		this.setState((prevState) => {
-			const data = [...prevState.data].map((item, i) => (item.active == false && i == index) ? Object.assign(item, { active: true }) : Object.assign(item, { active: false }));
-			console.log(data);
+			const updatedData = [...prevState.data].map((item, id) => {
+				if (id === index && item.active === false) {
+					return {
+						...item,
+						active: true
+					}
+					// item.active = true
+				}
+				else {
+					return {
+						...item,
+						active: false
+					}
+					// item.active = false
+				}
+			});
+			// const data = [...prevState.data].map((item, i) => (item.active == false && i == index) ? Object.assign(item, { active: true }) : Object.assign(item, { active: false }));
+			console.log(updatedData);
 			return {
 				selectedPlan: this.state.data[index],
-				data: data
+				data: updatedData
 			}
 		});
 	};
