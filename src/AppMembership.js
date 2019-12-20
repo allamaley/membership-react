@@ -6,38 +6,10 @@ class AppMembership extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			data: [
-				{
-					id: 0,
-					size: "100 blocks",
-					title: "Basic",
-					description: "...",
-					price: "1000",
-					active: false
-				},
-				{
-					id: 1,
-					size: "200 blocks",
-					title: "VIP",
-					description: "...",
-					price: "3000",
-					active: false
-				},
-				{
-					id: 2,
-					size: "300 blocks",
-					title: "Gold",
-					description: "...",
-					price: "6000",
-					active: false
-				}
-			],
+			data: this.props.data,
 			selectedPlan: this.props.selectedPlan,
 		}
 	};
-	componentDidUpdate() {
-		console.log("Did Update")
-	}
 	componentDidMount() {
 		if (this.state.selectedPlan !== null) {
 			const index = this.state.selectedPlan.id;
@@ -85,7 +57,6 @@ class AppMembership extends React.Component {
 			console.log(updatedData);
 			console.log(this.state.selectedPlan);
 			return {
-				selectedPlan: this.state.data[index],
 				data: updatedData
 			}
 		});
@@ -108,6 +79,7 @@ class AppMembership extends React.Component {
 						return <Plan
 							key={index}
 							data={plan}
+							submit={this.props.submit}
 							pickPlan={this.pickPlan.bind(this, index)}
 							selectedPlan={this.state.selectedPlan}
 							active={this.state.active}
