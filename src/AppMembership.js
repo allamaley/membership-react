@@ -35,32 +35,6 @@ class AppMembership extends React.Component {
 		}
 		console.log("Mounted")
 	}
-	pickPlan = (index) => {
-		this.setState((prevState) => {
-			const updatedData = [...prevState.data].map((item, id) => {
-				if (id === index && item.active === false) {
-					return {
-						...item,
-						active: true
-					}
-					// item.active = true
-				}
-				else {
-					return {
-						...item,
-						active: false
-					}
-					// item.active = false
-				}
-			});
-			// const data = [...prevState.data].map((item, i) => (item.active == false && i == index) ? Object.assign(item, { active: true }) : Object.assign(item, { active: false }));
-			console.log(updatedData);
-			console.log(this.state.selectedPlan);
-			return {
-				data: updatedData
-			}
-		});
-	};
 
 	render() {
 
@@ -79,15 +53,15 @@ class AppMembership extends React.Component {
 						return <Plan
 							key={index}
 							data={plan}
-							submit={this.props.submit}
-							pickPlan={this.pickPlan.bind(this, index)}
-							selectedPlan={this.state.selectedPlan}
-							active={this.state.active}
+							pickPlan={this.props.pickPlan.bind(this, index)}
+							selectedPlan={this.props.selectedPlan}
+							active={this.props.data[index].active}
 						/>
 					}
 					)}
 				</div>
 				<div className="error">you should pick a plan to continue</div>
+
 			</div>
 		);
 	}

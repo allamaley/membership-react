@@ -4,7 +4,7 @@ import './style.css';
 class Plan extends React.Component {
 	render() {
 		return (
-			<div className={this.props.data.active ? 'active-plan plan' : 'plan'}
+			<div className={this.props.active ? 'active-plan plan' : 'plan'}
 				onClick={this.props.pickPlan}>
 				<div className="size">{this.props.data.size}</div>
 				<div className="description">

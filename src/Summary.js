@@ -1,4 +1,5 @@
 import React from 'react';
+import Option from './Option';
 import './style.css';
 
 class Summary extends React.Component {
@@ -13,15 +14,10 @@ class Summary extends React.Component {
 
 				<div className="options">
 					<div className="option">
-						<label className="container" htmlFor="unicorn">
-							+ 500 Building Blocks and Dancing Unicorn
-            <input
-								type="checkbox"
-								value="bundles"
-								id="unicorn"
-							/>
-							<span className="checkmark"></span>
-						</label>
+						{
+							this.props.options.map(item => <Option key={item.name} options={item}
+								addToPrice={this.props.addToPrice} />)
+						}
 					</div>
 				</div>
 
@@ -30,13 +26,13 @@ class Summary extends React.Component {
 						<div className="size">{this.props.selectedPlan.size}</div>
 
 						<div className="description">
-							<span className="title">NAME</span>
-							<span className="description">DESC</span>
+							<span className="title">{this.props.selectedPlan.title}</span>
+							<span className="description">{this.props.selectedPlan.description}</span>
 						</div>
 
 						<div className="price">
 							<span className="euro-sign">€</span>
-							<span className="number">PRICE</span>
+							<span className="number">{this.props.selectedPlan.price}</span>
 						</div>
 					</div>
 				</div>

@@ -86,9 +86,9 @@ class AppUser extends React.Component {
 	}
 
 	submit = () => {
-		let job;
+		// let job;
 		if (!this.state.emailCheckedInDB) {
-			job = this.checkIfUserExists();
+			// job = this.checkIfUserExists();
 		} else {
 			if (this.state.existingUser && !this.state.loggedIn) {
 				// job = this.login();

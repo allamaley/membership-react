@@ -8,7 +8,7 @@ class AppReviewOrder extends React.Component {
 		super(props);
 		this.state = {
 			email: null,
-			selectedPlan: this.props.selectedPlan
+			// selectedPlan: this.props.selectedPlan
 		};
 
 	};
@@ -19,7 +19,11 @@ class AppReviewOrder extends React.Component {
 		return (
 			<div>
 				<h1 className="title">Confirm your subscription</h1>
-				<Summary selectedPlan={this.state.selectedPlan} />
+				<Summary
+					selectedPlan={this.props.selectedPlan}
+					addToPrice={this.props.addToPrice}
+					options={this.props.options}
+				/>
 			</div>
 		);
 	}
