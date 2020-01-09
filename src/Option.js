@@ -8,8 +8,8 @@ class Option extends React.Component {
 				+ {this.props.options.price} {this.props.options.name}
 				<input
 					type="checkbox"
-					value="bundles"
 					id="unicorn"
+					name={this.props.options.name}
 					onChange={this.props.addToPrice}
 				/>
 				<span className="checkmark"></span>

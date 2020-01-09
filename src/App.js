@@ -9,6 +9,7 @@ class App extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			// loading: false,
 			data: [
 				{
 					id: 0,
@@ -43,11 +44,11 @@ class App extends React.Component {
 			options: [
 				{
 					name: "unicorn",
-					price: 60000
+					price: 6000
 				},
 				{
 					name: "bundles",
-					price: 20000
+					price: 2000
 				},
 			],
 			currentStepNumber: 1,
@@ -72,18 +73,19 @@ class App extends React.Component {
 
 		});
 	}
-	addToPrice = (e) => {
-		const optionName = e.target.id;
+	addToPrice = (event) => {
+		const optionName = event.target.id;
+		const name = event.target.name;
+		console.log('checkbox selected is:', name);
 		let addPrice = 0;
 		this.setState((prevState) => {
 			prevState.options.forEach(element => {
-				if (element.name === ("'" + optionName + "'")) {
+				if (element.name === optionName) {
 					addPrice = element.price;
 				};
 			});
 			const newPrice = prevState.selectedPlan.price + addPrice;
-			console.log(prevState.selectedPlan.price);
-			const newData = Object.assign(...prevState.selectedPlan,
+			const newData = Object.assign(prevState.selectedPlan,
 				{
 					price: newPrice,
 				});
@@ -133,9 +135,6 @@ class App extends React.Component {
 				}
 			});
 			// const data = [...prevState.data].map((item, i) => (item.active == false && i == index) ? Object.assign(item, { active: true }) : Object.assign(item, { active: false }));
-			// console.log('updatedData is:', updatedData);
-			// console.log('previously selectedPlan', this.state.selectedPlan);
-			// console.log('newly selectedPlan', updatedData[index]);
 			return {
 				data: updatedData,
 				selectedPlan: updatedData[index],
