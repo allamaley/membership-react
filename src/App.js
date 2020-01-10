@@ -44,11 +44,13 @@ class App extends React.Component {
 			options: [
 				{
 					name: "unicorn",
-					price: 6000
+					price: 6000,
+					checked: false
 				},
 				{
 					name: "bundles",
-					price: 2000
+					price: 2000,
+					checked: false
 				},
 			],
 			currentStepNumber: 1,
@@ -81,9 +83,11 @@ class App extends React.Component {
 		this.setState((prevState) => {
 			prevState.options.forEach(element => {
 				if (element.name === optionName) {
-					addPrice = element.price;
+					element.checked = !element.checked;
+					addPrice = !element.checked ? -element.price : element.price;
 				};
 			});
+
 			const newPrice = prevState.selectedPlan.price + addPrice;
 			const newData = Object.assign(prevState.selectedPlan,
 				{
