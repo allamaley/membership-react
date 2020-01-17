@@ -17,14 +17,15 @@ class AppReviewOrder extends React.Component {
 	render() {
 
 		return (
-			<div>
+			<>
 				<h1 className="title">Confirm your subscription</h1>
 				<Summary
 					selectedPlan={this.props.selectedPlan}
 					addToPrice={this.props.addToPrice}
 					options={this.props.options}
+					memberData={this.props.memberData}
 				/>
-			</div>
+			</>
 		);
 	}
 }

@@ -24,9 +24,8 @@ class AppUser extends React.Component {
 	};
 
 
-	checkInput = (e) => {
-		const value = e.target.value;
-		const type = e.target.type;
+	checkInput = (event) => {
+		const { value, type } = event.target;
 		const validation = type === 'email' ? this.validateEmail(value)
 			: this.validateText(value);
 		console.log(validation);
@@ -119,26 +118,31 @@ class AppUser extends React.Component {
 	render() {
 
 		return (
-			<div>
+			<>
 				<h1 className="title">Account master</h1>
 
 				<h2 className="subtitle">Create an account or log in:</h2>
 				<form className="form">
 					<FormEmail
+						value={this.props.memberData}
 						checkInput={this.checkInput.bind(this)}
 						validEmail={this.state.validEmail}
+						handleChange={this.props.handleChange}
 					/>
 					<FormPassword
+						value={this.props.memberData}
 						checkInput={this.checkInput.bind(this)}
 						validPassword={this.state.validPassword}
 					/>
 					<FormName
+						value={this.props.memberData}
 						checkInput={this.checkInput.bind(this)}
 						validName={this.state.validName}
+						handleChange={this.props.handleChange}
 					/>
 
 				</form>
-			</div>
+			</>
 		);
 	}
 }

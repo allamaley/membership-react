@@ -39,7 +39,7 @@ class AppMembership extends React.Component {
 	render() {
 
 		return (
-			<div>
+			<>
 				<h1 className="title">Be a member!</h1>
 
 				<h2 className="subtitle">
@@ -62,7 +62,7 @@ class AppMembership extends React.Component {
 				</div>
 				<div className="error">you should pick a plan to continue</div>
 
-			</div>
+			</>
 		);
 	}
 }

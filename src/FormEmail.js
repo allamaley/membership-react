@@ -11,7 +11,10 @@ class FormEmail extends React.Component {
 					placeholder="test@email.com"
 					className="form-control"
 					id="email"
-					onBlur={this.props.checkInput}
+					name="email"
+					onKeyUp={this.props.checkInput}
+					onBlur={this.props.handleChange}
+					value={this.props.memberData}
 				/>
 				<div className="error info">
 					<a href="/">Reset</a>

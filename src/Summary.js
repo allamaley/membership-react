@@ -39,13 +39,13 @@ class Summary extends React.Component {
 
 				<div className="address">
 					<div className="w-2/3">
-						<h3>Member</h3>
-						<p className="description">Your address is</p>
+						<h3>Member: </h3>
+						<p className="description">Your email is: </p>
 					</div>
 
 					<div className="w-1/3">
-						<h3>NAME</h3>
-						<p className="leading-normal">ADDRESS</p>
+						<h3>{this.props.memberData.name}</h3>
+						<p className="leading-normal">{this.props.memberData.email}</p>
 					</div>
 				</div>
 			</div>

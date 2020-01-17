@@ -11,7 +11,10 @@ class FormName extends React.Component {
 					placeholder="Nice name"
 					className="form-control"
 					id="name"
+					name="name"
+					value={this.props.memberData}
 					onKeyUp={this.props.checkInput}
+					onBlur={this.props.handleChange}
 				/>
 				<div className="error" style={{ display: this.props.validName ? 'none' : 'block' }}>name is required</div>
 			</div>
